@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace ="query">
+  <!-- 
+  $ : 필드, 테이블
+  # : 값, abc = 'hong'
+   -->
+  
+  <!-- join -->
+  <insert id="insert">
+  insert into joins(idx, userid, userpw, usernm, useremail, useremail2, usertel, zipcode, address1, address2) 
+  value('0', #{userid}, #{userpw}, #{usernm} ,#{useremail},#{useremail2},#{usertel}, #{zipcode}, #{address1}, #{address2}) 
+  </insert>
+  
+  
+  <!-- 공지 출력  --> 
+  <select id="nselect" resultType="NoticeVo">                
+ 	select * from notice order by output='Y' desc, idx desc limit ${pageing}, ${pagelimit}
+  </select>
+  <!--  공지 페이징 count 값  result type = int  -->
+  <select id="npages" resultType="int">
+  select ceil(count(*)/#{pagelimit}) from notice
+  </select>
+ 
+ <!-- 공지 검색 (제목) -->
+ <select id ="nosearch" resultType="NoticeVo">
+ select * from notice where subject LIKE concat('%',#{nokey},'%')
+  order by idx desc;
+ </select>
+ 
+  
+  </mapper>
