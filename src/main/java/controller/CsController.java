@@ -22,11 +22,6 @@ public class CsController  {
 	
 	@RequestMapping("/cs")
 	public String page(Model m, HttpServletRequest req)  {
-	
-		//HttpServletRequest req  선언해야 파라미터값 가져올 수 잇음.
-		// view : 출력파트임 java 가 작동되서 파일 업로드 시킴!  
-		//file upload..?
-		
 		String cate = req.getParameter("cate");
 		
 		String sql = null;
@@ -92,8 +87,6 @@ public class CsController  {
 				
 			}
 			con.close();
-			//닫아주면 로딩 빨라짐..
-			//m.addAttribute("rows", rs.getString("ctn"));
 			m.addAttribute("faq", faq);
 			
 		}catch (Exception e) {
@@ -104,7 +97,3 @@ public class CsController  {
 	}
 	
 }
-
-//put으로 받으면 get,set 필요없음.. faq는 보여주기만 있으니 DAO 필요없음.
-//상품 출력도 DAO 가 필요없음!
-//map으로 넣어서 출력하세요
